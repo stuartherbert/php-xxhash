@@ -4,15 +4,19 @@ PHP extension to add support for the [xxhash](http://code.google.com/p/xxhash/) 
 
 ## How To Install
 
+```
    phpize
    ./configure --enable-xxhash
    make
    sudo make install
+```
 
 ## How To Use
 
 This extension adds one new PHP function:
 
+```
     int xxhash32(string $data);
+```
 
 It will checksum the string, and return the checksum.
