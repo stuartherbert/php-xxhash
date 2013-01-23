@@ -20,3 +20,7 @@ This extension adds one new PHP function:
 ```
 
 It will checksum the string, and return the checksum.
+
+## License
+
+BSD 2-clause license.
