@@ -13,22 +13,22 @@
 ZEND_GET_MODULE(xxhash)
 #endif
 
-static PHP_MINIT_FUNCTION(xxhash)
+PHP_MINIT_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
 
-static PHP_MSHUTDOWN_FUNCTION(xxhash)
+PHP_MSHUTDOWN_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
 
-static PHP_RINIT_FUNCTION(xxhash)
+PHP_RINIT_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
 
-static PHP_RSHUTDOWN_FUNCTION(xxhash)
+PHP_RSHUTDOWN_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
@@ -62,12 +62,12 @@ PHP_FUNCTION(xxhash32)
 	RETURN_LONG((long)sum);
 }
 
-const zend_function_entry xxhash_functions[] = {
+zend_function_entry xxhash_functions[] = {
 	PHP_FE(xxhash32, NULL)
 	{NULL, NULL, NULL}
 };
 
-const zend_module_entry xxhash_module_entry = {
+zend_module_entry xxhash_module_entry = {
 	STANDARD_MODULE_HEADER,
 	"xxhash",
 	xxhash_functions,
