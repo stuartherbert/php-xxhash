@@ -9,44 +9,26 @@
 
 #include "xxhash.c"
 
-zend_function_entry xxhash_functions[] = {
-	PHP_FE(xxhash32, NULL)
-	{NULL, NULL, NULL}
-};
-
-zend_module_entry xxhash_module_entry = {
-	STANDARD_MODULE_HEADER,
-	"xxhash",
-	xxhash_functions,
-	PHP_MINIT(xxhash),
-	PHP_MSHUTDOWN(xxhash),
-	NULL,
-	NULL,
-	PHP_MINFO(xxhash),
-	PHP_XXHASH_VERSION,
-	STANDARD_MODULE_PROPERTIES
-};
-
 #ifdef COMPILE_DL_XXHASH
 ZEND_GET_MODULE(xxhash)
 #endif
 
-PHP_MINIT_FUNCTION(xxhash)
+static PHP_MINIT_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
 
-PHP_MSHUTDOWN_FUNCTION(xxhash)
+static PHP_MSHUTDOWN_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
 
-PHP_RINIT_FUNCTION(xxhash)
+static PHP_RINIT_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
 
-PHP_RSHUTDOWN_FUNCTION(xxhash)
+static PHP_RSHUTDOWN_FUNCTION(xxhash)
 {
 	return SUCCESS;
 }
@@ -80,4 +62,21 @@ PHP_FUNCTION(xxhash32)
 	RETURN_LONG((long)sum);
 }
 
+const zend_function_entry xxhash_functions[] = {
+	PHP_FE(xxhash32, NULL)
+	{NULL, NULL, NULL}
+};
+
+const zend_module_entry xxhash_module_entry = {
+	STANDARD_MODULE_HEADER,
+	"xxhash",
+	xxhash_functions,
+	PHP_MINIT(xxhash),
+	PHP_MSHUTDOWN(xxhash),
+	NULL,
+	NULL,
+	PHP_MINFO(xxhash),
+	PHP_XXHASH_VERSION,
+	STANDARD_MODULE_PROPERTIES
+};
 
