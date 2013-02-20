@@ -6,6 +6,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "php_xxhash.h"
+#include "ext/hash/php_hash.h"
 
 #include "xxhash.c"
 
@@ -13,8 +14,48 @@
 ZEND_GET_MODULE(xxhash)
 #endif
 
+typedef struct {
+	void *state;
+} PHP_XXH32_CTX;
+
+PHP_HASH_API void PHP_XXH32Init(PHP_XXH32_CTX *context)
+{
+	context->state = XXH32_init(0);
+}
+
+PHP_HASH_API void PHP_XXH32Update(PHP_XXH32_CTX *context, const unsigned char *input, unsigned int inputLen)
+{
+	XXH32_feed(context->state, (void *)input, (int)inputLen);
+}
+
+PHP_HASH_API void PHP_XXH32Final(unsigned char digest[4], PHP_XXH32_CTX *context)
+{
+	unsigned int h32;
+
+	h32 = XXH32_result(context->state);
+
+	digest[0] = (unsigned char) ((h32 >> 24) & 0xff);
+	digest[1] = (unsigned char) ((h32 >> 16) & 0xff);
+	digest[2] = (unsigned char) ((h32 >> 8) & 0xff);
+	digest[3] = (unsigned char) (h32 & 0xff);
+
+	context->state = XXH32_init(0);
+}
+
+const php_hash_ops php_hash_xxh32_ops = {
+	(php_hash_init_func_t) PHP_XXH32Init,
+	(php_hash_update_func_t) PHP_XXH32Update,
+	(php_hash_final_func_t) PHP_XXH32Final,
+	(php_hash_copy_func_t) php_hash_copy,
+	4,
+	4,
+	sizeof(PHP_XXH32_CTX)
+};
+
 PHP_MINIT_FUNCTION(xxhash)
 {
+	php_hash_register_algo("xx32", &php_hash_xxh32_ops);
+
 	return SUCCESS;
 }
 
