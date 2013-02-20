@@ -23,14 +23,14 @@ It will checksum the string, and return the checksum.
 
 ## `hash()` integration
 
-It also registers the hash algorithm to be used in the `hash()` functions:
+It also registers the `xx32` hash algorithm to be used in the [`hash()`](http://www.php.net/manual/en/ref.hash.php) function family:
 
 ```
-    hash('xx', $data);
+    hash('xx32', $data);
 
 Or:
 
-    $h = hash_init('xx');
+    $h = hash_init('xx32');
     hash_update($h, $data);
     echo hash_final($h);
 ```
