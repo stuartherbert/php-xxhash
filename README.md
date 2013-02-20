@@ -21,6 +21,20 @@ This extension adds one new PHP function:
 
 It will checksum the string, and return the checksum.
 
+## `hash()` integration
+
+It also registers the hash algorithm to be used in the `hash()` functions:
+
+```
+    hash('xx', $data);
+
+Or:
+
+    $h = hash_init('xx');
+    hash_update($h, $data);
+    echo hash_final($h);
+```
+
 ## License
 
 BSD 2-clause license.
