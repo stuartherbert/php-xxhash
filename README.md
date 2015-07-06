@@ -21,11 +21,11 @@ Don't forget to load the extension in via php.ini or the like.
 Upon installation and enabling the extension within php.ini the following two new functions will be available to you:
 
 ```
-int xxhash32(string $data);
-int xxhash64(string $data);
+string xxhash32(string $data);
+string xxhash64(string $data);
 ```
 
-In both cases an integer will be returned, representing the hash of the $data input.
+In both cases a string will be returned, representing the digest (hash) of the $data input.
 
 
 ## Credits

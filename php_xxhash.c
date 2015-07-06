@@ -45,7 +45,7 @@ PHP_MINFO_FUNCTION(xxhash)
 PHP_FUNCTION(xxhash32)
 {
 	char *arg1 = NULL;
-	char *ret1 = NULL;
+	char ret1[128];
 	int arg1_len;
 	unsigned int sum;
 
@@ -58,16 +58,20 @@ PHP_FUNCTION(xxhash32)
 	/* compute the checksum */
 	sum = XXH32(arg1, arg1_len, 0);
 
+	/* convert to hash */
+	sprintf(ret1, "%08x", sum);
+
 	/* return the checksum */
-	RETURN_LONG((long)sum);
+	RETURN_STRING(ret1, 1);
 }
 
 PHP_FUNCTION(xxhash64)
 {
 	char *arg1 = NULL;
-	char *ret1 = NULL;
+	char ret1[128];
 	int arg1_len;
 	unsigned long long sum;
+	typedef unsigned int U32;
 
 	/* parse the parameters */
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg1, &arg1_len) == FAILURE || arg1_len < 1)
@@ -78,8 +82,11 @@ PHP_FUNCTION(xxhash64)
 	/* compute the checksum */
 	sum = XXH64(arg1, arg1_len, 0);
 
+	/* convert to hash */
+	sprintf(ret1, "%08x%08x", (U32)(sum >> 32), (U32)sum);
+
 	/* return the checksum */
-	RETURN_LONG((long long)sum);
+	RETURN_STRING(ret1, 1);
 }
 
 
