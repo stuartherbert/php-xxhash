@@ -30,7 +30,7 @@ In both cases an integer will be returned, representing the hash of the $data in
 
 ## Credits
 * Original implementation of [php-xxhash](https://github.com/stuartherbert/php-xxhash) by Stuart Herbert.
-
+* [xxHash](https://github.com/Cyan4973/xxHash) by Yann Collet.
 
 ## Licence
 
