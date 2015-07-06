@@ -38,7 +38,7 @@ PHP_MINFO_FUNCTION(xxhash)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "xxhash support", "enabled");
 	php_info_print_table_row(2, "extension version", PHP_XXHASH_VERSION);
-	php_info_print_table_row(2, "xxhash release", "http://code.google.com/p/xxhash/source/detail?r=6");
+	php_info_print_table_row(2, "xxhash release", "r40");
 	php_info_print_table_end();
 }
 
@@ -62,8 +62,30 @@ PHP_FUNCTION(xxhash32)
 	RETURN_LONG((long)sum);
 }
 
+PHP_FUNCTION(xxhash64)
+{
+	char *arg1 = NULL;
+	char *ret1 = NULL;
+	int arg1_len;
+	unsigned long long sum;
+
+	/* parse the parameters */
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg1, &arg1_len) == FAILURE || arg1_len < 1)
+	{
+		RETURN_NULL();
+	}
+
+	/* compute the checksum */
+	sum = XXH64(arg1, arg1_len, 0);
+
+	/* return the checksum */
+	RETURN_LONG((long long)sum);
+}
+
+
 zend_function_entry xxhash_functions[] = {
 	PHP_FE(xxhash32, NULL)
+	PHP_FE(xxhash64, NULL)
 	{NULL, NULL, NULL}
 };
 
