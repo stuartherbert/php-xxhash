@@ -1,8 +1,12 @@
-# php-xxhash
+PHP-xxHash
+==========
 
-PHP extension to add support for the [xxhash](http://code.google.com/p/xxhash/) fast hashing algorithm.  _xxhash_ is designed to be fast enough to use in real-time streaming applications.
+A PHP extension to add support for the [xxHash](https://github.com/Cyan4973/xxHash) fast hashing algorithm.
 
-## How To Install
+[xxHash](https://github.com/Cyan4973/xxHash) is an Extremely fast Hash algorithm, running at RAM speed limits. 
+It successfully completes the [SMHasher](http://code.google.com/p/smhasher/wiki/SMHasher) test suite which evaluates collision, dispersion and randomness qualities of hash functions.
+
+## Installation Instructions
 
 ```
    phpize
@@ -10,17 +14,24 @@ PHP extension to add support for the [xxhash](http://code.google.com/p/xxhash/) 
    make
    sudo make install
 ```
+Don't forget to load the extension in via php.ini or the like.
 
-## How To Use
+## Usage Instructions
 
-This extension adds one new PHP function:
+Upon installation and enabling the extension within php.ini the following two new functions will be available to you:
 
 ```
-    int xxhash32(string $data);
+int xxhash32(string $data);
+int xxhash64(string $data);
 ```
 
-It will checksum the string, and return the checksum.
+In both cases an integer will be returned, representing the hash of the $data input.
 
-## License
+
+## Credits
+* Original implementation of [php-xxhash](https://github.com/stuartherbert/php-xxhash) by Stuart Herbert.
+
+
+## Licence
 
 BSD 2-clause license.
