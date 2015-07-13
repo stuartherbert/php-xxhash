@@ -52,7 +52,6 @@ PHP_FUNCTION(xxhash64)
     size_t arg_len, len;
     zend_string *strg;
 	unsigned long long sum;
-	//typedef unsigned int U32;
 
     if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE || arg_len < 1) {
         return;
