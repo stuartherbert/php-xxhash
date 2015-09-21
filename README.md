@@ -5,12 +5,24 @@ PHP extension to add support for the [xxhash - r42](https://github.com/Cyan4973/
 
 ## How To Install
 
+Run
 ```
    phpize
    ./configure --enable-xxhash
    make
    sudo make install
+```  
+
+Add to the php.ini
+```  
+    extension=xxhash.so
 ```
+
+Restart apache
+```
+    sudo service apache2 restart  
+```
+  
 
 ## How To Use
 
