@@ -20,16 +20,37 @@ Please note at the moment the master branch should be used for PHP 5.x and devel
 ```
 Don't forget to load the extension in via php.ini or the like.
 
+To use with docker compose
+
+```
+
+RUN curl -fsSL 'https://github.com/tawkirahmed/php-xxhash/archive/develop.zip' -o xxhash.zip \
+    && mkdir -p xxhash \
+    && unzip -j xxhash.zip -d xxhash\
+    && rm xxhash.zip \
+    && ( \
+        cd xxhash \
+        && phpize \
+        && ./configure --enable-xxhash \
+        && make -j "$(nproc)" \
+        && make install \
+    ) \
+    && rm -r xxhash \
+    && docker-php-ext-enable xxhash
+
+```
+
 ## Usage Instructions
 
 Upon installation and enabling the extension within php.ini the following two new functions will be available to you:
 
 ```
-string xxhash32(string $data);
-string xxhash64(string $data);
+long xxhash32(string $data);
+long xxhash64(string $data);
 ```
 
-In both cases a string will be returned, representing the digest (hash) of the $data input.
+In both cases a long number will be returned, representing the digest (hash) of the $data input.
+Beware that in case of ```xxhash64``` negative number can be returned since php does not support unsigned long.
 
 
 ## Credits
