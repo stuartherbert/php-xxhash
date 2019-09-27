@@ -38,12 +38,9 @@ PHP_FUNCTION(xxhash32)
 
 	// compute the checksum
 	sum = XXH32(arg, arg_len, 0);
-
-	//convert to a hex string
-	strg = strpprintf(0, "%08x", sum);
-
-	// return the checksum
-	RETURN_STR(strg);
+	
+	/* return the checksum */
+	RETURN_LONG(sum);
 }
 
 PHP_FUNCTION(xxhash64)
@@ -60,11 +57,9 @@ PHP_FUNCTION(xxhash64)
 	// compute the checksum
 	sum = XXH64(arg, arg_len, 0);
 
-	//convert to a hex string
-	strg = strpprintf(0, "%08x%08x", (U32)(sum >> 32), (U32)sum);
-
-	// return the checksum
-	RETURN_STR(strg);
+	/* return the checksum */
+	/* Negative values can be returned since we cannot return  unsigned long to php */
+	RETURN_LONG(sum);
 }
 
 const zend_function_entry xxhash_functions[] = {
