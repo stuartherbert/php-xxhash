@@ -20,6 +20,8 @@ Please note at the moment the master branch should be used for PHP 5.x and devel
 ```
 Don't forget to load the extension in via php.ini or the like.
 
+More details can be found here: https://www.sitepoint.com/install-php-extensions-source/
+
 To use with docker compose
 
 ```
