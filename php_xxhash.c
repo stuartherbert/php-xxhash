@@ -102,7 +102,7 @@ PHP_FUNCTION(xxhash64Unsigned)
 	//Since php doesn't have unsinged long values, the value will be returned as string
 	char numberAsAString[20];
 	sprintf(numberAsAString, "%llu",sum);
-	RETURN_STRING(numberAsAString, 1);
+	RETURN_STRING(numberAsAString);
 }
 zend_function_entry xxhash_functions[] = {
 	PHP_FE(xxhash32, NULL)
