@@ -41,6 +41,12 @@ This extension adds three new PHP functions:
 
 They will checksum the string, and return the checksum.
 
+## Credits
+* Original implementation of [php-xxhash](https://github.com/stuartherbert/php-xxhash) by Stuart Herbert.
+* Original update to PHP 7 of [php-xxhash](https://github.com/eskimi/php-xxhash) by Eskimi.
+* [xxHash](https://github.com/Cyan4973/xxHash) by Yann Collet.
+
+
 ## License
 
 BSD 2-clause license.
