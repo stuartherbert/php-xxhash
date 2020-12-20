@@ -62,9 +62,30 @@ PHP_FUNCTION(xxhash64)
 	RETURN_LONG(sum);
 }
 
+PHP_FUNCTION(xxhash64Unsigned)
+{
+	char *arg = NULL;
+    size_t arg_len, len;
+    zend_string *strg;
+	unsigned long long sum;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE || arg_len < 1) {
+        return;
+    }
+
+	// compute the checksum
+	sum = XXH64(arg, arg_len, 0);
+	
+	//Since php doesn't have unsinged long values, the value will be returned as string
+	char numberAsAString[21];
+	sprintf(numberAsAString, "%llu",sum);
+	RETURN_STRING(numberAsAString);
+}
+
 const zend_function_entry xxhash_functions[] = {
 	ZEND_FE(xxhash32, NULL)
 	ZEND_FE(xxhash64, NULL)
+	ZEND_FE(xxhash64Unsigned, NULL)
 	PHP_FE_END
 };
 
